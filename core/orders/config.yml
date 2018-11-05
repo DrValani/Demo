@@ -1,0 +1,16 @@
+table_name: "orders"
+owner: "myteam"
+email: ["myteam@domain.com"]
+schedule: "0 19 * * *"
+sql_files:
+  - name: dedupe
+    file: "dedupe.sql"
+    output_table: "staging_orders_dedupe"
+  - name: enrich
+    file: "enrich.sql"
+    output_table: "staging_orders_enrich"
+    dependencies: ["dedupe"]
+  - name: aggregate
+    file: "aggregate.sql"
+    output_table: "orders"
+    dependencies: ["enrich"]

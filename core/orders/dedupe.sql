@@ -1,0 +1,1 @@
+select max(id), description, total from `production_orders` group by id 
